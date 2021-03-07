@@ -16,9 +16,7 @@ load("@rules_jvm_external//:defs.bzl", "maven_install")
 maven_install(
     artifacts = [
         # common dependencies
-        "org.apache.commons:commons-lang3:3.11",
         "com.google.code.gson:gson:2.8.6",
-        "com.google.guava:guava:30.1-jre",
         # aws lambda dependencies
         "com.amazonaws:aws-lambda-java-core:1.2.1",
         "com.amazonaws:aws-lambda-java-events:3.7.0",

@@ -1,4 +1,4 @@
-package main.java.com.hmellema.lambdatools.handlers.services;
+package com.hmellema.lambdatools.handlers.services;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
