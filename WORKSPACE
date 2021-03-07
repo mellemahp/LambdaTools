@@ -25,8 +25,6 @@ maven_install(
         "org.apache.logging.log4j:log4j-api:2.13.0",
         "org.apache.logging.log4j:log4j-core:2.13.2",
         "org.apache.logging.log4j:log4j-slf4j18-impl:2.13.0",
-        "org.slf4j:slf4j-api:1.7.25",
-        "org.slf4j:slf4j-log4j12:1.7.25",
         # test deps
         "org.mockito:mockito-all:1.10.19",
         "junit:junit:4.12",
