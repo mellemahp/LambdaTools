@@ -15,7 +15,7 @@ java_library(
 
 filegroup(
     name = "logging_config",
-    srcs = ["resources/log4j.xml"],
+    srcs = ["resources/logback.xml"],
     visibility = ["//visibility:public"]
 )
 
