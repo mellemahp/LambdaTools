@@ -18,6 +18,12 @@ java_library(
     visibility = ["//visibility:public"]
 )
 
+filegroup(
+    name = "logging_config",
+    srcs = ["resources/log4j2.xml"],
+    visibility = ["//visibility:public"]
+)
+
 java_library(
     name = "lambda_core_deps",
     exports = [
@@ -36,9 +42,6 @@ java_library(
         ":lambda_logging_deps",
         ":lambda_core_deps",
         "@maven//:com_google_code_gson_gson"
-    ],
-    resources = [
-        "resources/log4j2.xml"
     ],
     exports = [
         "@maven//:com_amazonaws_aws_lambda_java_core",
