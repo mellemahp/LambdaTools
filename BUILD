@@ -8,8 +8,7 @@ java_library(
 java_library(
     name = "runtime_logging_deps",
     exports = [
-        "@maven//:com_amazonaws_aws_lambda_java_log4j",
-        "@maven//:org_apache_logging_log4j_log4j_slf4j18_impl"
+        "@maven//:org_jlib_jlib_awslambda_logback"
     ],
     visibility = ["//visibility:public"]
 )
