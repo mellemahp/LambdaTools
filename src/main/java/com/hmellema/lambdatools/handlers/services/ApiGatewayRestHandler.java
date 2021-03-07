@@ -1,31 +1,23 @@
 package com.hmellema.lambdatools.handlers.services;
 
-import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.LambdaLogger;
-import com.amazonaws.services.lambda.runtime.RequestHandler;
-
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.Gson;
-import java.lang.reflect.Type;
+import com.amazonaws.services.lambda.runtime.Context;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import com.hmellema.lambdatools.handlers.BaseHandler;
+
 public abstract class ApiGatewayRestHandler<InputType, OutputType>
-  implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> 
+  extends BaseHandler<
+    InputType, OutputType,
+    APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent
+  > 
 {
 
-  protected LambdaLogger logger;
-  protected final Class<InputType> inputTypeClass;
-
-  Gson objectMapper;
-
   protected ApiGatewayRestHandler(Class<InputType> inputTypeClass) {
-    this.objectMapper = new Gson();
-    this.inputTypeClass = inputTypeClass;
+    super(inputTypeClass);
   }
 
   private APIGatewayProxyResponseEvent initializeResponse(Context context) {
@@ -45,7 +37,6 @@ public abstract class ApiGatewayRestHandler<InputType, OutputType>
     APIGatewayProxyRequestEvent event,
     Context context
   ) {
-    logger = context.getLogger();
     APIGatewayProxyResponseEvent response = initializeResponse(context);
 
     Map<String, String> requestBody = constructInputMap(event);
@@ -59,7 +50,7 @@ public abstract class ApiGatewayRestHandler<InputType, OutputType>
   }
 
   private Map<String, String> constructInputMap(APIGatewayProxyRequestEvent request) {
-    Map<String, String> inputMap = new HashMap();
+    Map<String, String> inputMap = new HashMap<>();
 
     if (request.getQueryStringParameters() != null) {
       inputMap.putAll(request.getQueryStringParameters());
@@ -75,16 +66,4 @@ public abstract class ApiGatewayRestHandler<InputType, OutputType>
 
     return inputMap;
   }
-  // see https://stackoverflow.com/questions/14139437/java-type-generic-as-argument-for-gson
-  protected InputType convertToInputType(Map<String, String> inputMap) {
-    String jsonString = objectMapper.toJson(inputMap);
-    Type inputTypeToken = TypeToken.getParameterized(inputTypeClass).getType();
-
-    return objectMapper.fromJson(jsonString, inputTypeToken);
-  }
-
-  protected abstract OutputType handler(
-    InputType request,
-    Context context
-  );
 }
