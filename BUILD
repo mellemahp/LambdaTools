@@ -29,7 +29,8 @@ java_library(
         "@maven//:com_google_code_gson_gson"
     ],
     exports = [
-        "@maven//:com_amazonaws_aws_lambda_java_core"
+        "@maven//:com_amazonaws_aws_lambda_java_core",
+        ":lambda_logging_deps"
     ],
     visibility = ["//visibility:public"]
 )
