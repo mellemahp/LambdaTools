@@ -20,11 +20,8 @@ maven_install(
         # aws lambda dependencies
         "com.amazonaws:aws-lambda-java-core:1.2.1",
         "com.amazonaws:aws-lambda-java-events:3.7.0",
-        "com.amazonaws:aws-lambda-java-log4j2:1.2.0",
         # logging
-        "org.apache.logging.log4j:log4j-api:2.13.0",
-        "org.apache.logging.log4j:log4j-core:2.13.2",
-        "org.apache.logging.log4j:log4j-slf4j18-impl:2.13.0",
+        "org.jlib:jlib-awslambda-logback:1.0.0",
         "org.slf4j:slf4j-api:1.8.0-beta4",
         # test deps
         "org.mockito:mockito-all:1.10.19",

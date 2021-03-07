@@ -8,7 +8,7 @@ java_library(
 java_library(
     name = "runtime_logging_deps",
     exports = [
-        "@maven//:com_amazonaws_aws_lambda_java_log4j2",
+        "@maven//:com_amazonaws_aws_lambda_java_log4j",
         "@maven//:org_apache_logging_log4j_log4j_slf4j18_impl"
     ],
     visibility = ["//visibility:public"]
@@ -16,7 +16,7 @@ java_library(
 
 filegroup(
     name = "logging_config",
-    srcs = ["resources/log4j2.xml"],
+    srcs = ["resources/log4j.xml"],
     visibility = ["//visibility:public"]
 )
 
