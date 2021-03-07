@@ -7,6 +7,9 @@ java_library(
         "@maven//:com_amazonaws_aws_lambda_java_log4j2",
         "@maven//:com_google_code_gson_gson"
     ],
+    exports = [
+        "@maven//:com_amazonaws_aws_lambda_java_core"
+    ]
     visibility = ["//visibility:public"]
 )
 
