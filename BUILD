@@ -6,7 +6,16 @@ java_library(
         "@maven//:org_apache_logging_log4j_log4j_core",
         "@maven//:org_apache_logging_log4j_log4j_slf4j18_impl",
         "@maven//:org_slf4j_slf4j_api"
+    ]
+)
+
+java_library(
+    name = "runtime_logging_deps",
+    exports = [
+        "@maven//:com_amazonaws_aws_lambda_java_log4j2",
+        "@maven//:org_slf4j_slf4j_log4j12"
     ],
+    visibility = ["//visibility:public"]
 )
 
 java_library(
@@ -14,7 +23,7 @@ java_library(
     exports = [
         "@maven//:com_amazonaws_aws_lambda_java_core",
         "@maven//:com_amazonaws_aws_lambda_java_events",
-    ],
+    ]
 )
 
 java_library(
@@ -28,9 +37,11 @@ java_library(
         ":lambda_core_deps",
         "@maven//:com_google_code_gson_gson"
     ],
+    resources = [
+        "resources/log4j2.xml"
+    ],
     exports = [
         "@maven//:com_amazonaws_aws_lambda_java_core",
-        ":lambda_logging_deps"
     ],
     visibility = ["//visibility:public"]
 )
