@@ -9,7 +9,7 @@ java_library(
     ],
     exports = [
         "@maven//:com_amazonaws_aws_lambda_java_core"
-    ]
+    ],
     visibility = ["//visibility:public"]
 )
 
