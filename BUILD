@@ -45,6 +45,7 @@ java_library(
     ],
     exports = [
         "@maven//:com_amazonaws_aws_lambda_java_core",
+        ":lambda_logging_deps"
     ],
     visibility = ["//visibility:public"]
 )
