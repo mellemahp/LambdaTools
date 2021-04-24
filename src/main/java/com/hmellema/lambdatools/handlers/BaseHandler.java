@@ -7,20 +7,36 @@ import java.lang.reflect.Type;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.Context;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
 
 import java.util.Map;
+import java.util.Optional;
 
 public abstract class BaseHandler<InputType, OutputType, RequestEventType, ResponseEventType> 
     implements RequestHandler<RequestEventType, ResponseEventType>
 {
-    protected final Logger log = LoggerFactory.getLogger(this.getClass());
-    protected final Gson objectMapper = new Gson();
-    protected final Class<InputType> inputTypeClass;
+    private static String LOG_ENV_VAR_NAME = "LOG_LEVEL";
+    private static String DEFAULT_LOG_LEVEL = "DEBUG";
 
-    protected BaseHandler(Class<InputType> inputTypeClass) { 
+    protected final Logger log;
+    protected final Class<InputType> inputTypeClass;
+    protected final Gson objectMapper = new Gson();
+    
+    protected BaseHandler(Class<InputType> inputTypeClass) {
+        log = (Logger) LoggerFactory.getLogger(this.getClass());
+        setLoggingLevelFromEnv(log);
+
         this.inputTypeClass = inputTypeClass;
+    }
+
+    // Sets logging level based on environment variable
+    // Defaults to DEFAULT LEVEL of log level
+    private void setLoggingLevelFromEnv(Logger logger) {
+        String envLogLevel = Optional.ofNullable(System.getenv(LOG_ENV_VAR_NAME))
+            .orElse(DEFAULT_LOG_LEVEL);
+        logger.setLevel(Level.toLevel(envLogLevel));
     }
 
     // see https://stackoverflow.com/questions/14139437/java-type-generic-as-argument-for-gson

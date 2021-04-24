@@ -19,13 +19,19 @@ maven_install(
         "com.google.code.gson:gson:2.8.6",
         # aws lambda dependencies
         "com.amazonaws:aws-lambda-java-core:1.2.1",
-        "com.amazonaws:aws-lambda-java-events:3.7.0",
+        "com.amazonaws:aws-lambda-java-events:3.8.0",
         # logging
         "org.jlib:jlib-awslambda-logback:1.0.0",
         "org.slf4j:slf4j-api:1.8.0-beta4",
+        "ch.qos.logback:logback-classic:1.3.0-alpha4",
+        # structured logging
+        "net.logstash.logback:logstash-logback-encoder:6.4",
         # test deps
         "org.mockito:mockito-all:1.10.19",
         "junit:junit:4.12",
+    ],
+    excluded_artifacts = [
+        "com.sun.mail:javax.mail",
     ],
     repositories = [
         "https://repo1.maven.org/maven2",

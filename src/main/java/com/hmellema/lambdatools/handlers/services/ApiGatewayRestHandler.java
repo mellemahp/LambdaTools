@@ -1,8 +1,11 @@
 package com.hmellema.lambdatools.handlers.services;
 
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent.ProxyRequestContext;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.amazonaws.services.lambda.runtime.Context;
+
+import org.slf4j.MDC;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,11 +35,19 @@ public abstract class ApiGatewayRestHandler<InputType, OutputType>
     return response;
   }
 
+  private void setLogParameters(APIGatewayProxyRequestEvent event) {
+    ProxyRequestContext requestContext = event.getRequestContext();
+    MDC.put("restRoute", requestContext.getPath());
+    MDC.put("httpMethod", requestContext.getHttpMethod());
+    MDC.put("restApiId", requestContext.getApiId());
+  }
+
   @Override
   public APIGatewayProxyResponseEvent handleRequest(
     APIGatewayProxyRequestEvent event,
     Context context
   ) {
+    setLogParameters(event);
     APIGatewayProxyResponseEvent response = initializeResponse(context);
 
     Map<String, String> requestBody = constructInputMap(event);

@@ -1,14 +1,17 @@
 java_library(
     name = "lambda_logging_deps",
     exports = [
-        "@maven//:org_slf4j_slf4j_api"
+        "@maven//:org_slf4j_slf4j_api",
+        "@maven//:ch_qos_logback_logback_classic",
+        "@maven//:net_logstash_logback_logstash_logback_encoder"
     ]
 )
 
 java_library(
     name = "runtime_logging_deps",
     exports = [
-        "@maven//:org_jlib_jlib_awslambda_logback"
+        "@maven//:org_jlib_jlib_awslambda_logback",
+        "@maven//:net_logstash_logback_logstash_logback_encoder"
     ],
     visibility = ["//visibility:public"]
 )
